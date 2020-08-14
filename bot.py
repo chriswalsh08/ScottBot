@@ -202,4 +202,4 @@ async def clear_error(ctx, error):
         await ctx.send('Please specify an amount of messages to delete.')
 
 # Running bot using bot token from Discord
-client.run('NzQyNzY3NTY5MDUxNTgyNTU0.XzK6NA.sMey640nLORFfQzo_MScrC6s4oU')
+client.run('NzQyNzY3NTY5MDUxNTgyNTU0.XzK6NA.2ul0mi5bkjGe6TdYbuHtJY7ah5I')
