@@ -21,6 +21,13 @@ client = commands.Bot(command_prefix=get_prefix)
 status = cycle(['Back to work!', 'No goofing off >:(',
                 'Noah smells good :)', 'Hi mom!', 'Conference room in 10', 'with the API', '.help'])
 
+# GIFs for 'gamer night' commands
+my_files = [
+    discord.File('gifs/wheelchair1.gif'),
+    discord.File('gifs/wheelchair2.gif'),
+    discord.File('gifs/wheelchair3.gif')
+]
+
 ###### EVENTS ######
 
 # Make sure the bot is online and set custom status
@@ -64,15 +71,31 @@ async def on_guild_remove(guild):
 
 @client.event
 async def on_member_join(member):
-    await print(f'{member} has joined the team!')
+    for channel in member.guild.channels:
+        if str(channel) == "general":
+            await channel.send(f"""The temp is here! Toby, get {member.mention} started on the new hire paperwork!""")
 
 # Member leave message
 
 
 @client.event
-async def on_member_remove(member, ctx):
-    await print(f'{member} walked out on us! Get Toby to put up the help wanted sign!')
-    await ctx.send("Get Toby to put up a help wanted sign, {member} walked out on us!")
+async def on_member_remove(member):
+    for channel in member.guild.channels:
+        if str(channel) == "general":
+            await channel.send(f"""Rest assured, {member.mention} won't be getting any severance pay. See ya!""")
+
+# Bot responds to certain keywords
+
+
+@client.event
+async def on_message(message):
+    if client.user.id != message.author.id:
+        if 'whomst' in message.content:
+            await message.channel.send("It's gamer night boyos, all hands on deck! @here")
+            await message.channel.send(files=my_files)
+
+    await client.process_commands(message)
+
 
 ###### TASKS ######
 
@@ -179,4 +202,4 @@ async def clear_error(ctx, error):
         await ctx.send('Please specify an amount of messages to delete.')
 
 # Running bot using bot token from Discord
-client.run('NzQyNzY3NTY5MDUxNTgyNTU0.XzK6NA.HFidFrmOIKZqpLDcK0quRc28rIY')
+client.run('NzQyNzY3NTY5MDUxNTgyNTU0.XzK6NA.sMey640nLORFfQzo_MScrC6s4oU')
