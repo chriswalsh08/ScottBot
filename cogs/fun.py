@@ -1,6 +1,9 @@
 # Import modules
 import discord
 import random
+
+from aiohttp import request
+from discord import Embed
 from discord.ext import commands
 
 # Create Fun cog
@@ -12,7 +15,6 @@ class Fun(commands.Cog):
         self.client = client
 
     # Almighty Conch command
-
     @commands.command(aliases=['conch', '8ball', 'eightball'], brief="Ask the Almighty Conch a question")
     async def almightyconch(self, ctx, *, question):
         responses = ['It is certain.',
@@ -37,6 +39,43 @@ class Fun(commands.Cog):
                      "I'd think long and hard about that one, chief.",
                      'Doubt.']
         await ctx.send(f'Question: {question}\nThe Almighty Conch: {random.choice(responses)}')
+
+    # Animal fact command
+    @commands.command(brief="Display an animal fact")
+    async def animalfact(self, ctx, animal: str):
+        if (animal := animal.lower()) in ("dog", "cat", "panda", "fox", "bird", "koala"):
+            fact_url = f"https://some-random-api.ml/facts/{animal}"
+            image_url = f"https://some-random-api.ml/img/{'birb' if animal == 'bird' else animal}"
+
+            async with request("GET", image_url, headers={}) as response:
+                if response.status == 200:
+                    data = await response.json()
+                    image_link = data["link"]
+
+                else:
+                    image_link = None
+
+            async with request("GET", fact_url, headers={}) as response:
+                if response.status == 200:
+                    data = await response.json()
+
+                    embed = Embed(title=f"{animal.title()} Fact:",
+                                  description=data["fact"],
+                                  colour=ctx.author.colour)
+                    if image_link is not None:
+                        embed.set_image(url=image_link)
+
+                    await ctx.send(embed=embed)
+                else:
+                    await ctx.send(f"API returned a {response.status} status.")
+        else:
+            await ctx.send("No facts are available for that animal.")
+
+    # Animal fact error
+    @animalfact.error
+    async def animalfact_error(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send("Choose an animal from the following list that you would like a fact about: dog, cat, panda, fox, bird, or koala")
 
 
 def setup(client):

@@ -1,4 +1,4 @@
-# Scott Bot
+# ScottBot
 # Author: Christopher James Walsh
 # Created in August 2020 to spice up my friends' Discord server with funny games, a music player,
 # and some moderation commands.
@@ -8,6 +8,7 @@ import discord
 import os
 import random
 import json
+from aiohttp import request
 from discord.ext import commands, tasks
 from itertools import cycle
 
@@ -28,7 +29,7 @@ client = commands.Bot(command_prefix=get_prefix, description=description)
 status = cycle(['Back to work!', 'No goofing off >:(',
                 'Noah smells good :)', 'Hi mom!', 'Conference room in 10', 'with the API', '.help'])
 
-# GIFs for 'gamer night' commands
+# GIFs for 'gamer night' event listener
 my_files = [
     discord.File('gifs/wheelchair1.gif'),
     discord.File('gifs/wheelchair2.gif'),
@@ -97,20 +98,22 @@ async def on_member_remove(member):
 @client.event
 async def on_message(message):
     if client.user.id != message.author.id:
-        if 'whomst' in message.content:
+        if 'whomst' in message.content.lower():
             await message.channel.send("It's gamer night boyos, all hands on deck! @here")
             await message.channel.send(files=my_files)
-        if '69' in message.content:
+        if "69" in message.content.lower():
             await message.channel.send(file=discord.File('gifs/nice.gif'))
-        if 'bye' in message.content:
+        if 'bye' in message.content.lower():
             await message.channel.send(file=discord.File('gifs/goodbye.gif'))
-        if 'bot sucks' in message.content:
+        if 'bot sucks' in message.content.lower():
             await message.channel.send("no u")
             await message.channel.send(file=discord.File('gifs/sad_mike.gif'))
-        if 'no u' in message.content:
+        if 'no u' in message.content.lower():
             await message.channel.send("no u")
 
     await client.process_commands(message)
+
+# Server levelling system
 
 
 ###### TASKS ######
@@ -154,9 +157,13 @@ async def changeprefix(ctx, prefix):
 
 @client.command(brief="Clears messages in current channel")
 @commands.has_permissions(manage_messages=True)
+@commands.cooldown(3, 10, commands.BucketType.user)
 async def clear(ctx, amount: int):
     amount += 1
-    await ctx.channel.purge(limit=amount)
+    if amount > 11:
+        await ctx.send("Nice try bucko, you can't delete over 10 messages at once!")
+    else:
+        await ctx.channel.purge(limit=amount)
 
 # Check bot's ping (in milliseconds!)
 
@@ -167,7 +174,7 @@ async def ping(ctx):
 
 ###### ERRORS ######
 
-# Bot error message
+# Bot command error message
 
 
 @client.event
@@ -175,7 +182,7 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send("Beep boop. Command not found!")
 
-# Clear command error prompt
+# Clear command error message
 
 
 @clear.error
