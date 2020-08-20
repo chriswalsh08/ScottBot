@@ -9,6 +9,7 @@ import os
 import random
 import json
 from aiohttp import request
+from discord import Embed
 from discord.ext import commands, tasks
 from itertools import cycle
 
@@ -101,14 +102,14 @@ async def on_message(message):
         if 'whomst' in message.content.lower():
             await message.channel.send("It's gamer night boyos, all hands on deck! @here")
             await message.channel.send(files=my_files)
-        if "69" in message.content.lower():
+        elif "69" in message.content.lower():
             await message.channel.send(file=discord.File('gifs/nice.gif'))
-        if 'bye' in message.content.lower():
+        elif 'bye' in message.content.lower():
             await message.channel.send(file=discord.File('gifs/goodbye.gif'))
-        if 'bot sucks' in message.content.lower():
+        elif 'bot sucks' in message.content.lower():
             await message.channel.send("no u")
             await message.channel.send(file=discord.File('gifs/sad_mike.gif'))
-        if 'no u' in message.content.lower():
+        elif 'no u' in message.content.lower():
             await message.channel.send("no u")
 
     await client.process_commands(message)
@@ -170,7 +171,13 @@ async def clear(ctx, amount: int):
 
 @client.command(brief="Displays ScottBot's ping in milliseconds")
 async def ping(ctx):
-    await ctx.send(f'Pong! My ping is {round(client.latency * 1000)}ms!')
+    embed = Embed(
+        title=f"Pong!",
+        description=f"My ping is {round(client.latency * 1000)}ms!",
+        colour=ctx.author.colour)
+
+    await ctx.send(embed=embed)
+
 
 ###### ERRORS ######
 
@@ -180,7 +187,11 @@ async def ping(ctx):
 @client.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        await ctx.send("Beep boop. Command not found!")
+        embed = Embed(
+            title=f"Oops!",
+            description=f"Command not found! Type .help if you need the list of my commands!",
+            colour=ctx.author.colour)
+        await ctx.send(embed=embed)
 
 # Clear command error message
 

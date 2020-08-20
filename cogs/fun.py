@@ -59,9 +59,10 @@ class Fun(commands.Cog):
                 if response.status == 200:
                     data = await response.json()
 
-                    embed = Embed(title=f"{animal.title()} Fact:",
-                                  description=data["fact"],
-                                  colour=ctx.author.colour)
+                    embed = Embed(
+                        title=f"{animal.title()} Fact:",
+                        description=data["fact"],
+                        colour=ctx.author.colour)
                     if image_link is not None:
                         embed.set_image(url=image_link)
 
