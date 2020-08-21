@@ -40,6 +40,42 @@ class Fun(commands.Cog):
                      'Doubt.']
         await ctx.send(f'Question: {question}\nThe Almighty Conch: {random.choice(responses)}')
 
+    # Compliment command :)
+    @commands.command(brief="Give your friends a nice compliment")
+    async def compliment(self, ctx, member: discord.Member):
+        compliments = ['you smell nice today!',
+                       'how do you get your hair so silky?',
+                       'you have the prettiest eyes!',
+                       'you really brighten up the room :)',
+                       'the person who sent this loves you!',
+                       'you are a really great friend.',
+                       'you are loved by your friends and family.',
+                       'your smile is contagious!',
+                       "you're like sunshine on a rainy day.",
+                       'being around oyu is like a happy little vacation.',
+                       'you inspire me to be a better bot.',
+                       'you are a gift to those around you!'
+                       "you're all that and a family-sized bag of chips!",
+                       "on a scale from 1-10, you're an 11!"]
+        await ctx.send(f'{member.mention}, {random.choice(compliments)}')
+
+    # Insult command
+    @commands.command(brief="Insult the mentioned user!")
+    async def insult(self, ctx, member: discord.Member):
+        insults = ['being around you honestly makes me want to throw up.',
+                   "I'm gonna beat the goofy out of you.",
+                   'your gene pool could use a little chlorine.',
+                   'if you were any more inbred, you would be a sandwich.',
+                   'I would slap you, but it would be considered animal abuse.',
+                   "I'm trying to see things from your point of view but I can't stick my head that far up my own ass.",
+                   "don't be ashamed of who you are, that's your parents job.",
+                   'your ass should be jealous of all of the shit coming out of your mouth.',
+                   "your only chance of getting laid is to climb up a chicken's ass and wait.",
+                   "you're dumber than snake mittens!",
+                   "I'll never forget the first time we met, but I'll keep trying.",
+                   "your teeth are so jacked up you could eat an apple through a fence."]
+        await ctx.send(f'{member.mention}, {random.choice(insults)}')
+
     # Animal fact command
     @commands.command(brief="Display an animal fact")
     async def animalfact(self, ctx, animal: str):

@@ -3,7 +3,7 @@
 # Created in August 2020 to spice up my friends' Discord server with funny games, a music player,
 # and some moderation commands.
 
-# Import commands and libraries
+# Import modules
 import discord
 import os
 import random
@@ -102,8 +102,6 @@ async def on_message(message):
         if 'whomst' in message.content.lower():
             await message.channel.send("It's gamer night boyos, all hands on deck! @here")
             await message.channel.send(files=my_files)
-        elif "69" in message.content.lower():
-            await message.channel.send(file=discord.File('gifs/nice.gif'))
         elif 'bye' in message.content.lower():
             await message.channel.send(file=discord.File('gifs/goodbye.gif'))
         elif 'bot sucks' in message.content.lower():
@@ -113,9 +111,6 @@ async def on_message(message):
             await message.channel.send("no u")
 
     await client.process_commands(message)
-
-# Server levelling system
-
 
 ###### TASKS ######
 
@@ -137,6 +132,20 @@ async def load(ctx, extension):
 @client.command(hidden=True)
 async def unload(ctx, extension):
     client.unload_extension(f'cogs.{extension}')
+
+# Custom help command
+
+
+@client.command(hidden=True, brief="Displays the help dash")
+async def help(ctx):
+    embed = Embed(
+        title="Help Commands",
+        description="A categorized list of Scottbot's commands!"
+        colour=ctx.author.colour
+    )
+    embed.set_thumbnail(
+        url="https://media2.giphy.com/media/55SfA4BxofRBe/giphy.gif?cid=ecf05e47n74f220gey16m63wccnqu5kcjw7eulr6z4n8c0l3&rid=giphy.gif")
+    embed.add_field(name="")
 
 # Change command prefix
 
@@ -201,9 +210,11 @@ async def clear_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send('Please specify an amount of messages to delete.')
 
+# Import cogs
+
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-# Running bot using bot token from Discord
+# Run bot using bot token from Discord
 client.run('NzQyNzY3NTY5MDUxNTgyNTU0.XzK6NA.2ul0mi5bkjGe6TdYbuHtJY7ah5I')

@@ -1,6 +1,7 @@
 # Import modules
 import discord
 import random
+from discord import Embed
 from discord.ext import commands
 
 # Create Gambling cog
@@ -16,7 +17,12 @@ class Gambling(commands.Cog):
     async def coinflip(self, ctx):
         choices = ["heads", "tails"]
         coin = random.choice(choices)
-        await ctx.send("The result is " + coin + "!")
+        embed = Embed(
+            title="Flipping coin...",
+            description="The result is " + coin + "!",
+            colour=ctx.author.colour
+        )
+        await ctx.send(embed=embed)
 
     # Roll dice command
     @commands.command(brief="Roll from the following dice: d4, d6, d8, d10, d20, d100")
