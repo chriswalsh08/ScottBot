@@ -26,6 +26,10 @@ def get_prefix(client, message):
 description = "Chatbot with some fun social, pre-programmed response, and moderation commands."
 client = commands.Bot(command_prefix=get_prefix, description=description)
 
+# Remove the default help command from this bot so that a custom help command can be created
+
+client.remove_command('help')
+
 # Create list of statuses for bot status changer to use
 status = cycle(['Back to work!', 'No goofing off >:(',
                 'Noah smells good :)', 'Hi mom!', 'Conference room in 10', 'with the API', '.help'])
@@ -136,16 +140,26 @@ async def unload(ctx, extension):
 # Custom help command
 
 
-# @client.command(hidden=True, brief="Displays the help dash")
-# async def help(ctx):
-#     embed = Embed(
-#         title="Help Commands",
-#         description="A categorized list of Scottbot's commands!"
-#         colour=ctx.author.colour
-#     )
-#     embed.set_thumbnail(
-#         url="https://media2.giphy.com/media/55SfA4BxofRBe/giphy.gif?cid=ecf05e47n74f220gey16m63wccnqu5kcjw7eulr6z4n8c0l3&rid=giphy.gif")
-#     embed.add_field(name="")
+@client.command(hidden=True, brief="Displays the help dash")
+async def help(ctx):
+    embed = Embed(
+        title="Help Commands",
+        description="A categorized list of Scottbot's commands! .help brings up this list!",
+        colour=ctx.author.colour
+    )
+    embed.set_thumbnail(
+        url="https://media2.giphy.com/media/55SfA4BxofRBe/giphy.gif?cid=ecf05e47n74f220gey16m63wccnqu5kcjw7eulr6z4n8c0l3&rid=giphy.gif")
+    embed.add_field(name="Moderator Commands:", 
+                    value=".ban - bans the mentioned user with reason argument\n.kick - kicks the mentioned user with reason argument",
+                    inline=False)
+    embed.set_footer(text="Developed by CJW 2020")
+    embed.add_field(name="Gambling Commands:",
+                    value=".coinflip - flip a coin\n.roll - roll a dice in 1dN format",
+                    inline=False)
+    embed.add_field(name="Fun Commands:",
+                    value=".conch - ask the Almighty Conch a question\n.insult - insult the mentioned user\n.compliment - compliment the mentioned user\n.gayrate - rate how happy the mentioned user is :)\n.animalfact - ask Scottbot for a fact about the target animal",
+                    inline=False)             
+    await ctx.send(embed=embed)
 
 # Change command prefix
 
