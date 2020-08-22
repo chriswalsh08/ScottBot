@@ -76,6 +76,12 @@ class Fun(commands.Cog):
                    "your teeth are so jacked up you could eat an apple through a fence."]
         await ctx.send(f'{member.mention}, {random.choice(insults)}')
 
+    # STR8R8 command
+    @commands.command(brief="Rate how happy the target user is!")
+    async def gayrate(self, ctx, member: discord.Member):
+        happy = random.randrange(1,101)
+        await ctx.send(f'{member.mention} is {happy}% gay! Nice')
+
     # Animal fact command
     @commands.command(brief="Display an animal fact")
     async def animalfact(self, ctx, animal: str):

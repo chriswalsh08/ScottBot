@@ -136,16 +136,16 @@ async def unload(ctx, extension):
 # Custom help command
 
 
-@client.command(hidden=True, brief="Displays the help dash")
-async def help(ctx):
-    embed = Embed(
-        title="Help Commands",
-        description="A categorized list of Scottbot's commands!"
-        colour=ctx.author.colour
-    )
-    embed.set_thumbnail(
-        url="https://media2.giphy.com/media/55SfA4BxofRBe/giphy.gif?cid=ecf05e47n74f220gey16m63wccnqu5kcjw7eulr6z4n8c0l3&rid=giphy.gif")
-    embed.add_field(name="")
+# @client.command(hidden=True, brief="Displays the help dash")
+# async def help(ctx):
+#     embed = Embed(
+#         title="Help Commands",
+#         description="A categorized list of Scottbot's commands!"
+#         colour=ctx.author.colour
+#     )
+#     embed.set_thumbnail(
+#         url="https://media2.giphy.com/media/55SfA4BxofRBe/giphy.gif?cid=ecf05e47n74f220gey16m63wccnqu5kcjw7eulr6z4n8c0l3&rid=giphy.gif")
+#     embed.add_field(name="")
 
 # Change command prefix
 
