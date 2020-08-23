@@ -67,21 +67,12 @@ class Fun(commands.Cog):
                    'your gene pool could use a little chlorine.',
                    'if you were any more inbred, you would be a sandwich.',
                    'I would slap you, but it would be considered animal abuse.',
-                   "I'm trying to see things from your point of view but I can't stick my head that far up my own ass.",
                    "don't be ashamed of who you are, that's your parents job.",
-                   'your ass should be jealous of all of the shit coming out of your mouth.',
-                   "your only chance of getting laid is to climb up a chicken's ass and wait.",
                    "you're dumber than snake mittens!",
                    "I'll never forget the first time we met, but I'll keep trying.",
                    "your teeth are so jacked up you could eat an apple through a fence."]
         await ctx.send(f'{member.mention}, {random.choice(insults)}')
-
-    # STR8R8 command
-    @commands.command(brief="Rate how happy the target user is!")
-    async def gayrate(self, ctx, member: discord.Member):
-        happy = random.randrange(1,101)
-        await ctx.send(f'{member.mention} is {happy}% gay! Nice')
-
+        
     # Animal fact command
     @commands.command(brief="Display an animal fact")
     async def animalfact(self, ctx, animal: str):

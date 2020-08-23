@@ -3,6 +3,12 @@
 # Created in August 2020 to spice up my friends' Discord server with funny games, a music player,
 # and some moderation commands.
 
+##### TO DO LIST #####
+# - Implement a functional leveling system
+# - Implement music capabilities
+# - Implement a Steam gameprice checker with some sort of API
+# - Add in more fun commands, possibly a currency system, etc.
+
 # Import modules
 import discord
 import os
@@ -157,7 +163,7 @@ async def help(ctx):
                     value=".coinflip - flip a coin\n.roll - roll a dice in 1dN format",
                     inline=False)
     embed.add_field(name="Fun Commands:",
-                    value=".conch - ask the Almighty Conch a question\n.insult - insult the mentioned user\n.compliment - compliment the mentioned user\n.gayrate - rate how happy the mentioned user is :)\n.animalfact - ask Scottbot for a fact about the target animal",
+                    value=".conch - ask the Almighty Conch a question\n.insult - insult the mentioned user\n.compliment - compliment the mentioned user\n.animalfact - ask Scottbot for a fact about the target animal",
                     inline=False)             
     await ctx.send(embed=embed)
 
