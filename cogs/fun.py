@@ -76,7 +76,8 @@ class Fun(commands.Cog):
     # Animal fact command
     @commands.command(brief="Display an animal fact")
     async def animalfact(self, ctx, animal: str):
-        if (animal := animal.lower()) in ("dog", "cat", "panda", "fox", "bird", "koala"):
+        animal = animal.lower()
+        if (animal == "dog", "cat", "panda", "fox", "bird", "koala"):
             fact_url = f"https://some-random-api.ml/facts/{animal}"
             image_url = f"https://some-random-api.ml/img/{'birb' if animal == 'bird' else animal}"
 
