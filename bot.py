@@ -119,6 +119,8 @@ async def on_message(message):
             await message.channel.send(file=discord.File('gifs/sad_mike.gif'))
         elif 'no u' in message.content.lower():
             await message.channel.send("no u")
+        elif '-play' in message.content.lower():
+            await message.channel.send("Playing a song? Consider adding it to Jon's playlist so we can jam to it in the future: http://linoit.com/users/JmannOK/canvases/Songs")
 
     await client.process_commands(message)
 
@@ -155,7 +157,7 @@ async def help(ctx):
     )
     embed.set_thumbnail(
         url="https://media2.giphy.com/media/55SfA4BxofRBe/giphy.gif?cid=ecf05e47n74f220gey16m63wccnqu5kcjw7eulr6z4n8c0l3&rid=giphy.gif")
-    embed.add_field(name="Moderator Commands:", 
+    embed.add_field(name="Moderator Commands:",
                     value=".ban - bans the mentioned user with reason argument\n.kick - kicks the mentioned user with reason argument",
                     inline=False)
     embed.set_footer(text="Developed by CJW 2020")
@@ -164,7 +166,7 @@ async def help(ctx):
                     inline=False)
     embed.add_field(name="Fun Commands:",
                     value=".conch - ask the Almighty Conch a question\n.insult - insult the mentioned user\n.compliment - compliment the mentioned user\n.animalfact - ask Scottbot for a fact about the target animal",
-                    inline=False)             
+                    inline=False)
     await ctx.send(embed=embed)
 
 # Change command prefix
