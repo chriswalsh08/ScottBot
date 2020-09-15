@@ -239,4 +239,4 @@ for filename in os.listdir('./cogs'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
 # Run bot using bot token from Discord
-client.run(key)
+client.run(gJ2QTJZxUygvBAnGdW4vmG0K0Y8RxicZ)
