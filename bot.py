@@ -40,12 +40,12 @@ client.remove_command('help')
 status = cycle(['Back to work!', 'No goofing off >:(',
                 'Noah smells good :)', 'Hi mom!', 'Conference room in 10', 'with the API', '.help'])
 
-# GIFs for 'gamer night' event listener
-my_files = [
-    discord.File('gifs/wheelchair1.gif'),
-    discord.File('gifs/wheelchair2.gif'),
-    discord.File('gifs/wheelchair3.gif')
-]
+# GIFs for 'gamer night' event listener -- Currently not in use
+#my_files = [
+#    discord.File('gifs/wheelchair1.gif'),
+#    discord.File('gifs/wheelchair2.gif'),
+#    discord.File('gifs/wheelchair3.gif')
+#]
 
 ###### EVENTS ######
 
@@ -110,8 +110,8 @@ async def on_member_remove(member):
 async def on_message(message):
     if client.user.id != message.author.id:
         if 'whomst' in message.content.lower():
-            await message.channel.send("It's gamer night boyos, all hands on deck! @here")
-            await message.channel.send(files=my_files)
+            await message.channel.send("Grab a beer, gamer night is @here")
+            await message.channel.send(file=discord.File('gifs/wheelchairgang.gif'))
         elif 'bye' in message.content.lower():
             await message.channel.send(file=discord.File('gifs/goodbye.gif'))
         elif 'bot sucks' in message.content.lower():
@@ -119,8 +119,6 @@ async def on_message(message):
             await message.channel.send(file=discord.File('gifs/sad_mike.gif'))
         elif 'no u' in message.content.lower():
             await message.channel.send("no u")
-        elif '-play' in message.content.lower():
-            await message.channel.send("Playing a song? Consider adding it to Jon's playlist so we can jam to it in the future: http://linoit.com/users/JmannOK/canvases/Songs")
 
     await client.process_commands(message)
 
@@ -239,4 +237,4 @@ for filename in os.listdir('./cogs'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
 # Run bot using bot token from Discord
-client.run(gJ2QTJZxUygvBAnGdW4vmG0K0Y8RxicZ)
+client.run(KEY)
