@@ -115,6 +115,12 @@ async def on_message(message):
         elif 'blinkers' in message.content.lower():
             await message.channel.send(file=discord.File('gifs/elon.gif'))
             await message.channel.send(file=discord.File('gifs/blinkers.gif'))
+        elif 'Blinkers' in message.content.lower():
+            await message.channel.send(file=discord.File('gifs/elon.gif'))
+            await message.channel.send(file=discord.File('gifs/blinkers.gif'))
+        elif '@Blinkers' in message.content.lower():
+            await message.channel.send(file=discord.File('gifs/elon.gif'))
+            await message.channel.send(file=discord.File('gifs/blinkers.gif'))
         elif 'bye' in message.content.lower():
             await message.channel.send(file=discord.File('gifs/goodbye.gif'))
         elif 'bot sucks' in message.content.lower():
