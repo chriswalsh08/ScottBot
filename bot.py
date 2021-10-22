@@ -112,6 +112,9 @@ async def on_message(message):
         if 'whomst' in message.content.lower():
             await message.channel.send("Grab a beer, gamer night is @here")
             await message.channel.send(file=discord.File('gifs/wheelchairgang.gif'))
+        elif 'blinkers' in message.content.lower():
+            await message.channel.send(file=discord.File('gifs/elon.gif'))
+            await message.channel.send(file=discord.File('gifs/blinkers.gif'))
         elif 'bye' in message.content.lower():
             await message.channel.send(file=discord.File('gifs/goodbye.gif'))
         elif 'bot sucks' in message.content.lower():
